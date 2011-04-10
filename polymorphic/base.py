@@ -65,6 +65,7 @@ class PolymorphicModelBase(ModelBase):
         # get first user defined manager; if there is one, make it the _default_manager
         user_manager = self.get_first_user_defined_manager(model_name, attrs)
         if user_manager:
+            user_manager.model = new_class
             def_mgr = user_manager._copy_to_model(new_class)
             #print '## add default manager', type(def_mgr)
             new_class.add_to_class('_default_manager', def_mgr)
